@@ -21,5 +21,46 @@ package model;
  * @author abudhabi
  */
 public class OrbitalPoint {
+    private long id;
+    private long cachedTime;
     
+    public double getX() {
+        throw new UnsupportedOperationException("");
+    }
+    
+    public double getY() {
+        throw new UnsupportedOperationException("");
+    }
+    
+    public double getZ() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    /**
+     * @return the cachedTime
+     */
+    public long getCachedTime() {
+        return cachedTime;
+    }
+
+    /**
+     * @param cachedTime the cachedTime to set
+     */
+    public void setCachedTime(long cachedTime) {
+        this.cachedTime = cachedTime;
+    }
+
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 }
