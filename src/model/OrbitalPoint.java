@@ -43,8 +43,7 @@ public class OrbitalPoint {
     protected final double eccentricity;
     // Unused. Angle between orbital plane and reference plane.
     protected final double inclination;
-//    // Unused. Angle between orbital plane and rotation plane.
-//    protected double tilt;
+
 
     public OrbitalPoint(long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
         this.id = id;
@@ -166,18 +165,4 @@ public class OrbitalPoint {
     public double getInclination() {
         return inclination;
     }
-//
-//    /**
-//     * @return the tilt
-//     */
-//    public double getTilt() {
-//        return tilt;
-//    }
-//
-//    /**
-//     * @param tilt the tilt to set
-//     */
-//    public void setTilt(double tilt) {
-//        this.tilt = tilt;
-//    }
 }
