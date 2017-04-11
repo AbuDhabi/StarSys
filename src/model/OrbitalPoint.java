@@ -16,7 +16,7 @@
  */
 package model;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 
 /**
  * 
@@ -28,11 +28,11 @@ public class OrbitalPoint {
     protected String name; 
     // One day per unit of time.
     public static final int MILLIS_PER_TIME_UNIT = 1000*60*60*24; 
-    protected long cachedTime;
+    protected double cachedTime;
     // Offset is added to time, resulting in more 'uniqueness'.
     protected final int offset;
     // If there is no parent (primary), then center is the reference point.
-    protected final Point center;
+    protected final Point2D.Double center;
     // If not null, then this is what this object orbits, and used as its center.
     protected final OrbitalPoint parent;
     // Kilometers.
@@ -43,10 +43,10 @@ public class OrbitalPoint {
     protected final double eccentricity;
     // Unused. Angle between orbital plane and reference plane.
     protected final double inclination;
-    // Unused. Angle between orbital plane and rotation plane.
-    protected double tilt;
+//    // Unused. Angle between orbital plane and rotation plane.
+//    protected double tilt;
 
-    public OrbitalPoint(long id, String name, long cachedTime, int offset, Point center, OrbitalPoint parent, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination, double tilt) {
+    public OrbitalPoint(long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
         this.id = id;
         this.name = name;
         this.cachedTime = cachedTime;
@@ -57,22 +57,21 @@ public class OrbitalPoint {
         this.angularVelocity = angularVelocity;
         this.eccentricity = eccentricity;
         this.inclination = inclination;
-        this.tilt = tilt;
     }
     
     public double getX() { return getX(cachedTime);  }
     
-    public double getX(long time) {
+    public double getX(double time) {
         if (getParent() != null) {
-            return getParent().getX(time) + semiMajorAxis * Math.cos(getOffset() + time * angularVelocity);
+            return getParent().getX(time) + semiMajorAxis * Math.cos(offset + time * angularVelocity);
         } else {
-            return center.getX() + semiMajorAxis * Math.cos(getOffset() + time * angularVelocity);
+            return center.getX() + semiMajorAxis * Math.cos(offset + time * angularVelocity);
         }
     }
     
     public double getY() { return getY(cachedTime);  }
     
-    public double getY(long time) {
+    public double getY(double time) {
         if (getParent() != null) {
             return getParent().getY(time) + semiMajorAxis * Math.sin(offset + time * angularVelocity);
         } else {
@@ -87,14 +86,14 @@ public class OrbitalPoint {
     /**
      * @return the cachedTime
      */
-    public long getCachedTime() {
+    public double getCachedTime() {
         return cachedTime;
     }
 
     /**
      * @param cachedTime the cachedTime to set
      */
-    public void setCachedTime(long cachedTime) {
+    public void setCachedTime(double cachedTime) {
         this.cachedTime = cachedTime;
     }
 
@@ -129,7 +128,7 @@ public class OrbitalPoint {
     /**
      * @return the center
      */
-    public Point getCenter() {
+    public Point2D.Double getCenter() {
         return center;
     }
 
@@ -167,18 +166,18 @@ public class OrbitalPoint {
     public double getInclination() {
         return inclination;
     }
-
-    /**
-     * @return the tilt
-     */
-    public double getTilt() {
-        return tilt;
-    }
-
-    /**
-     * @param tilt the tilt to set
-     */
-    public void setTilt(double tilt) {
-        this.tilt = tilt;
-    }
+//
+//    /**
+//     * @return the tilt
+//     */
+//    public double getTilt() {
+//        return tilt;
+//    }
+//
+//    /**
+//     * @param tilt the tilt to set
+//     */
+//    public void setTilt(double tilt) {
+//        this.tilt = tilt;
+//    }
 }
