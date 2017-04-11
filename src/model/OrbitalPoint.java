@@ -62,7 +62,7 @@ public class OrbitalPoint {
     
     public double getX(double time) {
         if (getParent() != null) {
-            return getParent().getX(time) + semiMajorAxis * Math.cos(offset + time * angularVelocity);
+            return parent.getX(time) + semiMajorAxis * Math.cos(offset + time * angularVelocity);
         } else {
             return center.getX() + semiMajorAxis * Math.cos(offset + time * angularVelocity);
         }
@@ -72,7 +72,7 @@ public class OrbitalPoint {
     
     public double getY(double time) {
         if (getParent() != null) {
-            return getParent().getY(time) + semiMajorAxis * Math.sin(offset + time * angularVelocity);
+            return parent.getY(time) + semiMajorAxis * Math.sin(offset + time * angularVelocity);
         } else {
             return center.getY() + semiMajorAxis * Math.sin(offset + time * angularVelocity);
         }
