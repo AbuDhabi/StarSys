@@ -20,6 +20,7 @@ import model.Chunk;
 import model.GasGiant;
 import model.MassiveBody;
 import model.OrbitalPoint;
+import model.SpectralClass;
 import model.Star;
 import model.Terrestrial;
 
@@ -29,7 +30,7 @@ import model.Terrestrial;
  */
 public interface Generator {
     
-    public Star generateRandomStar(String spectralClass, OrbitalPoint parent);
+    public Star generateRandomStar(SpectralClass spectralClass, OrbitalPoint parent);
     
     public Terrestrial generateRandomTerrestrialWorld(OrbitalPoint parent);
     

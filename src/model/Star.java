@@ -30,4 +30,9 @@ public class Star extends MassiveBody {
         super(tilt, rotationVelocity, mass, radius, temperature, albedo, color, id, name, cachedTime, offset, center, parent, children, semiMajorAxis, angularVelocity, eccentricity, inclination);
     }
     
+    // In watts.
+    public double getLuminosity() {
+        return 4*Math.PI*Math.pow(radius*1000, 2) * 5.670367131313131313e-8 * Math.pow(temperature, 4);
+    }
+    
 }
