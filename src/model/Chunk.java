@@ -18,6 +18,7 @@ package model;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
+import java.util.List;
 
 /**
  *
@@ -25,8 +26,8 @@ import java.awt.geom.Point2D;
  */
 public class Chunk extends MassiveBody {
 
-    public Chunk(double tilt, double rotationVelocity, double mass, double radius, double temperature, double albedo, Color color, long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
-        super(tilt, rotationVelocity, mass, radius, temperature, albedo, color, id, name, cachedTime, offset, center, parent, semiMajorAxis, angularVelocity, eccentricity, inclination);
+    public Chunk(double tilt, double rotationVelocity, double mass, double radius, double temperature, double albedo, Color color, long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, List<OrbitalPoint> children, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
+        super(tilt, rotationVelocity, mass, radius, temperature, albedo, color, id, name, cachedTime, offset, center, parent, children, semiMajorAxis, angularVelocity, eccentricity, inclination);
     }
     
 }

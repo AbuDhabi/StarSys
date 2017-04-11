@@ -14,20 +14,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package model;
+package generator;
 
-import java.awt.Color;
-import java.awt.geom.Point2D;
-import java.util.List;
+import model.Chunk;
+import model.GasGiant;
+import model.MassiveBody;
+import model.OrbitalPoint;
+import model.Star;
+import model.Terrestrial;
 
 /**
  *
  * @author abudhabi
  */
-public class Star extends MassiveBody {
-
-    public Star(double tilt, double rotationVelocity, double mass, double radius, double temperature, double albedo, Color color, long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, List<OrbitalPoint> children, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
-        super(tilt, rotationVelocity, mass, radius, temperature, albedo, color, id, name, cachedTime, offset, center, parent, children, semiMajorAxis, angularVelocity, eccentricity, inclination);
-    }
+public interface Generator {
     
+    public Star generateRandomStar(String spectralClass, OrbitalPoint parent);
+    
+    public Terrestrial generateRandomTerrestrialWorld(OrbitalPoint parent);
+    
+    public Chunk generateRandomChunk(OrbitalPoint parent);
+    
+    public GasGiant generateRandomGasGiant(OrbitalPoint parent);
+    
+    public Star generateRandomStarSystem(int nrofSuns, String spectralClassOfPrimary);
+    
+    public MassiveBody populatePlanetWithMoons(int nrofMoons, MassiveBody parent);
 }
