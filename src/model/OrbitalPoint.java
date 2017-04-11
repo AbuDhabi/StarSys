@@ -17,6 +17,8 @@
 package model;
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -35,6 +37,8 @@ public class OrbitalPoint {
     protected final Point2D.Double center;
     // If not null, then this is what this object orbits, and used as its center.
     protected final OrbitalPoint parent;
+    // All orbiters.
+    protected final List<OrbitalPoint> children;
     // Kilometers.
     protected final double semiMajorAxis;
     // Radians per day.
@@ -45,17 +49,31 @@ public class OrbitalPoint {
     protected final double inclination;
 
 
-    public OrbitalPoint(long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
+    public OrbitalPoint(long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, List<OrbitalPoint> children, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
         this.id = id;
-        this.name = name;
         this.cachedTime = cachedTime;
         this.offset = offset;
-        this.center = center;
         this.parent = parent;
         this.semiMajorAxis = semiMajorAxis;
         this.angularVelocity = angularVelocity;
         this.eccentricity = eccentricity;
         this.inclination = inclination;
+        
+        if (name == null) {
+            this.name = "Orbital Node #"+id;
+        } else {
+            this.name = name;
+        }
+        if (children == null) {
+            this.children = new ArrayList<>();
+        } else {
+            this.children = children;
+        }
+        if (center == null) {
+            this.center = new Point2D.Double(); // Implicitly (0,0).
+        } else {
+            this.center = center;
+        }
     }
     
     public double getX() { return getX(cachedTime);  }
@@ -164,5 +182,12 @@ public class OrbitalPoint {
      */
     public double getInclination() {
         return inclination;
+    }
+
+    /**
+     * @return the children
+     */
+    public List<OrbitalPoint> getChildren() {
+        return children;
     }
 }

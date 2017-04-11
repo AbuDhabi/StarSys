@@ -54,7 +54,8 @@ public class OrbitalPointTest {
             123L,
             456, 
             new Point2D.Double(0,0), 
-            null,
+            null, // parent
+            null, // children
             149598023, // semi major axis
             2*Math.PI/year, // angular velocity 
             0,
@@ -65,8 +66,9 @@ public class OrbitalPointTest {
             "Moon",
             456L,
             789, 
-            null, 
+            null, // center, unused if child
             erf,
+            null, // children
             384399, // semi major axis
             2*Math.PI/siderealMonth, // angular velocity 
             0,
