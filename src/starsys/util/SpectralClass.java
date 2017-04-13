@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package starsys.model;
+package starsys.util;
 
 import java.awt.Color;
-import starsys.util.Constants;
+import java.util.Random;
 
 /**
  *
@@ -36,6 +36,26 @@ public enum SpectralClass {
     L (2000,   1300,  0.45*Constants.SUN_MASS, 0.075*Constants.SUN_MASS,  0.2*Constants.SUN_RADIUS,   0.1*Constants.SUN_RADIUS, Color.RED),
     T (1300,    700, 0.075*Constants.SUN_MASS, 0.012*Constants.SUN_MASS,  0.2*Constants.SUN_RADIUS,   0.1*Constants.SUN_RADIUS, Color.MAGENTA),
     D (100000, 5000,   1.3*Constants.SUN_MASS,  0.17*Constants.SUN_MASS, 0.02*Constants.SUN_RADIUS, 0.008*Constants.SUN_RADIUS, Color.MAGENTA);
+
+    public static SpectralClass getRandomSpectralClassOToM(Random random) {
+        int number = random.nextInt(7);
+        if (number == 0) {
+            return O;
+        } else if (number == 1) {
+            return B;
+        } else if (number == 2) {
+            return A;
+        } else if (number == 3) {
+            return F;
+        } else if (number == 4) {
+            return G;
+        } else if (number == 5) {
+            return K;
+        } else if (number == 6) {
+            return M;
+        }
+        return null; // Guess the random number generator is malfunctioning.
+    }
     
     private final double upperTemperature;
     private final double lowerTemperature;

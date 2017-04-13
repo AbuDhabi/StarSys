@@ -16,29 +16,10 @@
  */
 package starsys.generator;
 
-import starsys.model.Chunk;
-import starsys.model.GasGiant;
-import starsys.model.MassiveBody;
-import starsys.model.OrbitalPoint;
-import starsys.util.SpectralClass;
-import starsys.model.Star;
-import starsys.model.Terrestrial;
-
 /**
  *
  * @author abudhabi
  */
-public interface Generator {
+public class SystemParameters {
     
-    public Star generateStar(CelestialBodyParameters params);
-    
-    public Terrestrial generateTerrestrialWorld(CelestialBodyParameters params);
-    
-    public Chunk generateChunk(CelestialBodyParameters params);
-    
-    public GasGiant generateGasGiant(CelestialBodyParameters params);
-    
-    public Star generateStarSystem(SystemParameters params);
-    
-    public MassiveBody populatePlanetWithMoons(SystemParameters params);
 }

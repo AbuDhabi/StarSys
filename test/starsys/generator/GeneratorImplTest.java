@@ -23,7 +23,7 @@ import starsys.model.Chunk;
 import starsys.model.GasGiant;
 import starsys.model.MassiveBody;
 import starsys.model.OrbitalPoint;
-import starsys.model.SpectralClass;
+import starsys.util.SpectralClass;
 import starsys.model.Star;
 import starsys.model.Terrestrial;
 import org.junit.After;
@@ -62,86 +62,21 @@ public class GeneratorImplTest {
      * Test of generateRandomStar method, of class GeneratorImpl.
      */
     @Test
-    public void testGenerateRandomStar() {
+    public void testGenerateRandomAClassStar() {
         Generator g = new GeneratorImpl(new Random());
-        System.out.println(g.generateRandomStar(SpectralClass.A, null).toJson());
+        Star star = g.generateStar(new CelestialBodyParameters().setSpectralClass(SpectralClass.A));
+        System.out.println(star.toJson());
+        
+        assertTrue(star.getSpectralClass() == SpectralClass.A);
+        assertTrue(star.getMass() >= SpectralClass.A.getLowerMass());
+        assertTrue(star.getMass() <= SpectralClass.A.getUpperMass());
+        assertTrue(star.getRadius() >= SpectralClass.A.getLowerRadius());
+        assertTrue(star.getRadius() <= SpectralClass.A.getUpperRadius());
+        assertTrue(star.getTemperature()>= SpectralClass.A.getLowerTemperature());
+        assertTrue(star.getTemperature() <= SpectralClass.A.getUpperTemperature());
+        assertTrue(star.getParent() == null);
+        assertTrue(star.getSemiMajorAxis() == 0);
     }
 
-    /**
-     * Test of generateRandomTerrestrialWorld method, of class GeneratorImpl.
-     */
-    @Test
-    public void testGenerateRandomTerrestrialWorld() {
-        System.out.println("generateRandomTerrestrialWorld");
-        OrbitalPoint parent = null;
-        GeneratorImpl instance = null;
-        Terrestrial expResult = null;
-        Terrestrial result = instance.generateRandomTerrestrialWorld(parent);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of generateRandomChunk method, of class GeneratorImpl.
-     */
-    @Test
-    public void testGenerateRandomChunk() {
-        System.out.println("generateRandomChunk");
-        OrbitalPoint parent = null;
-        GeneratorImpl instance = null;
-        Chunk expResult = null;
-        Chunk result = instance.generateRandomChunk(parent);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of generateRandomGasGiant method, of class GeneratorImpl.
-     */
-    @Test
-    public void testGenerateRandomGasGiant() {
-        System.out.println("generateRandomGasGiant");
-        OrbitalPoint parent = null;
-        GeneratorImpl instance = null;
-        GasGiant expResult = null;
-        GasGiant result = instance.generateRandomGasGiant(parent);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of generateRandomStarSystem method, of class GeneratorImpl.
-     */
-    @Test
-    public void testGenerateRandomStarSystem() {
-        System.out.println("generateRandomStarSystem");
-        int nrofSuns = 0;
-        String spectralClassOfPrimary = "";
-        GeneratorImpl instance = null;
-        Star expResult = null;
-        Star result = instance.generateRandomStarSystem(nrofSuns, spectralClassOfPrimary);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of populatePlanetWithMoons method, of class GeneratorImpl.
-     */
-    @Test
-    public void testPopulatePlanetWithMoons() {
-        System.out.println("populatePlanetWithMoons");
-        int nrofMoons = 0;
-        MassiveBody parent = null;
-        GeneratorImpl instance = null;
-        MassiveBody expResult = null;
-        MassiveBody result = instance.populatePlanetWithMoons(nrofMoons, parent);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
     
 }

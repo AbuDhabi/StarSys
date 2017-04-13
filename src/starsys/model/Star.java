@@ -16,7 +16,7 @@
  */
 package starsys.model;
 
-import com.google.gson.Gson;
+import starsys.util.SpectralClass;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.util.List;
