@@ -19,8 +19,6 @@ package starsys.generator;
 import starsys.model.Chunk;
 import starsys.model.GasGiant;
 import starsys.model.MassiveBody;
-import starsys.model.OrbitalPoint;
-import starsys.util.SpectralClass;
 import starsys.model.Star;
 import starsys.model.Terrestrial;
 

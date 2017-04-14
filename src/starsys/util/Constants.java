@@ -25,6 +25,11 @@ public class Constants {
     public static final double SUN_MASS = 1.98855e30;
     // Kilometers.
     public static final double SUN_RADIUS = 696342;
+    // Kilograms.
+    public static final double EARTH_MASS = 5.97237e24;
+    // Kilometers.
+    public static final double EARTH_RADIUS = 6371.0;
+            
     
     // Kilometers.
     public static final double ASTRONOMICAL_UNIT = 1.4960e8;

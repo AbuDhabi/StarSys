@@ -53,6 +53,14 @@ public abstract class MassiveBody extends OrbitalPoint {
             this.color = color;
         }
     }
+    
+    /**
+     * In kilograms per kilometer cubed.
+     * @return 
+     */
+    public double getDensity() {
+        return mass / (4/3*Math.PI*radius*radius*radius);
+    }
 
     /**
      * @return the tilt

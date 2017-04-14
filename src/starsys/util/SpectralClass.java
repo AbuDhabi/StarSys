@@ -38,20 +38,20 @@ public enum SpectralClass {
     D (100000, 5000,   1.3*Constants.SUN_MASS,  0.17*Constants.SUN_MASS, 0.02*Constants.SUN_RADIUS, 0.008*Constants.SUN_RADIUS, Color.MAGENTA);
 
     public static SpectralClass getRandomSpectralClassOToM(Random random) {
-        int number = random.nextInt(7);
+        int number = random.nextInt(300);
         if (number == 0) {
             return O;
-        } else if (number == 1) {
+        } else if (number >= 1 && number < 20) {
             return B;
-        } else if (number == 2) {
+        } else if (number >= 20 && number < 50) {
             return A;
-        } else if (number == 3) {
+        } else if (number >= 50 && number < 90) {
             return F;
-        } else if (number == 4) {
+        } else if (number >= 90 && number < 160) {
             return G;
-        } else if (number == 5) {
+        } else if (number >= 160 && number < 220) {
             return K;
-        } else if (number == 6) {
+        } else if (number >= 220) {
             return M;
         }
         return null; // Guess the random number generator is malfunctioning.

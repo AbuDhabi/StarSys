@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.util.List;
+import starsys.util.GasGiantClass;
 
 /**
  *
@@ -27,14 +28,16 @@ import java.util.List;
  */
 public class GasGiant extends MassiveBody {
     private Atmosphere atmosphere;
+    private final GasGiantClass gasGiantClass;
 
-    public GasGiant(Atmosphere atmosphere, double tilt, double rotationVelocity, double mass, double radius, double temperature, double albedo, Color color, long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, List<OrbitalPoint> children, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
+    public GasGiant(Atmosphere atmosphere, GasGiantClass gasGiantClass, double tilt, double rotationVelocity, double mass, double radius, double temperature, double albedo, Color color, long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, List<OrbitalPoint> children, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
         super(tilt, rotationVelocity, mass, radius, temperature, albedo, color, id, name, cachedTime, offset, center, parent, children, semiMajorAxis, angularVelocity, eccentricity, inclination);
         if (atmosphere == null) {
             this.atmosphere = new Atmosphere();
         } else {
             this.atmosphere = atmosphere;
         }
+        this.gasGiantClass = gasGiantClass;
     }
     
     /**
@@ -49,6 +52,13 @@ public class GasGiant extends MassiveBody {
      */
     public void setAtmosphere(Atmosphere atmosphere) {
         this.atmosphere = atmosphere;
+    }
+
+    /**
+     * @return the gasGiantClass
+     */
+    public GasGiantClass getGasGiantClass() {
+        return gasGiantClass;
     }
 
 }

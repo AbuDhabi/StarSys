@@ -21,7 +21,10 @@ import java.awt.geom.Point2D;
 import java.util.List;
 import starsys.model.Atmosphere;
 import starsys.model.OrbitalPoint;
+import starsys.util.ChunkClass;
+import starsys.util.GasGiantClass;
 import starsys.util.SpectralClass;
+import starsys.util.TerrestrialClass;
 
 /**
  * A collection of parameters that can be either set, or null. If they're null,
@@ -51,6 +54,11 @@ public class CelestialBodyParameters  {
     private Color color;
     private Atmosphere atmosphere;
     private SpectralClass spectralClass;
+    private Boolean nearCompanion;
+    private TerrestrialClass terrestrialClass;
+    private Double density;
+    private ChunkClass chunkClass;
+    private GasGiantClass gasGiantClass;
 
     /**
      * @return the name
@@ -353,6 +361,85 @@ public class CelestialBodyParameters  {
      */
     public CelestialBodyParameters setSpectralClass(SpectralClass spectralClass) {
         this.spectralClass = spectralClass;
+        return this;
+    }
+
+    /**
+     * @return the nearCompanion
+     */
+    public Boolean getNearCompanion() {
+        return nearCompanion;
+    }
+
+    /**
+     * @param nearCompanion the nearCompanion to set
+     * @return 
+     */
+    public CelestialBodyParameters setNearCompanion(Boolean nearCompanion) {
+        this.nearCompanion = nearCompanion;
+        return this;
+    }
+
+    /**
+     * @return the terrestrialClass
+     */
+    public TerrestrialClass getTerrestrialClass() {
+        return terrestrialClass;
+    }
+
+    /**
+     * @param terrestrialClass the terrestrialClass to set
+     */
+    public CelestialBodyParameters setTerrestrialClass(TerrestrialClass terrestrialClass) {
+        this.terrestrialClass = terrestrialClass;
+        return this;
+    }
+
+    /**
+     * @return the density
+     */
+    public Double getDensity() {
+        return density;
+    }
+
+    /**
+     * @param density the density to set
+     * @return 
+     */
+    public CelestialBodyParameters setDensity(Double density) {
+        this.density = density;
+        return this;
+    }
+
+    /**
+     * @return the chunkClass
+     */
+    public ChunkClass getChunkClass() {
+        return chunkClass;
+    }
+
+    /**
+     * @param chunkClass the chunkClass to set
+     * @return 
+     */
+    public CelestialBodyParameters setChunkClass(ChunkClass chunkClass) {
+        this.chunkClass = chunkClass;
+        return this;
+    }
+
+    /**
+     * @return the gasGiantClass
+     */
+    public GasGiantClass getGasGiantClass() {
+        return gasGiantClass;
+    }
+
+    /**
+     * @param gasGiantClass the gasGiantClass to set
+     * @return 
+     */
+    public CelestialBodyParameters setGasGiantClass(GasGiantClass gasGiantClass) {
+        this.gasGiantClass = gasGiantClass;
         return this;
     }
     

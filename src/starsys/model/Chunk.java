@@ -19,15 +19,26 @@ package starsys.model;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.util.List;
+import starsys.util.ChunkClass;
 
 /**
  *
  * @author abudhabi
  */
 public class Chunk extends MassiveBody {
+    
+    private final ChunkClass chunkClass;
 
-    public Chunk(double tilt, double rotationVelocity, double mass, double radius, double temperature, double albedo, Color color, long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, List<OrbitalPoint> children, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
+    public Chunk(ChunkClass chunkClass, double tilt, double rotationVelocity, double mass, double radius, double temperature, double albedo, Color color, long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, List<OrbitalPoint> children, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
         super(tilt, rotationVelocity, mass, radius, temperature, albedo, color, id, name, cachedTime, offset, center, parent, children, semiMajorAxis, angularVelocity, eccentricity, inclination);
+        this.chunkClass = chunkClass;
+    }
+
+    /**
+     * @return the chunkClass
+     */
+    public ChunkClass getChunkClass() {
+        return chunkClass;
     }
     
 }
