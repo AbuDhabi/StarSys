@@ -14,20 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package model;
+package starsys.util;
 
-import java.awt.Color;
-import java.awt.geom.Point2D;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
  * @author abudhabi
  */
-public class Chunk extends MassiveBody {
-
-    public Chunk(double tilt, double rotationVelocity, double mass, double radius, double temperature, double albedo, Color color, long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, List<OrbitalPoint> children, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
-        super(tilt, rotationVelocity, mass, radius, temperature, albedo, color, id, name, cachedTime, offset, center, parent, children, semiMajorAxis, angularVelocity, eccentricity, inclination);
+public class RandomUtils {
+    public static <T> T returnOneOfThese(Random r, List<T> things) {
+        return things.get(r.nextInt(things.size()));
     }
-    
 }

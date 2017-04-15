@@ -14,8 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package model;
+package starsys.model;
 
+import com.google.gson.Gson;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class OrbitalPoint {
     // If there is no parent (primary), then center is the reference point.
     protected final Point2D.Double center;
     // If not null, then this is what this object orbits, and used as its center.
-    protected final OrbitalPoint parent;
+    private OrbitalPoint parent;
     // All orbiters.
     protected final List<OrbitalPoint> children;
     // Kilometers.
@@ -47,7 +48,10 @@ public class OrbitalPoint {
     protected final double eccentricity;
     // Unused. Angle between orbital plane and reference plane.
     protected final double inclination;
-
+    
+    public String toJson() {
+        return new Gson().toJson(this);
+    }
 
     public OrbitalPoint(long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, List<OrbitalPoint> children, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
         this.id = id;
@@ -189,5 +193,12 @@ public class OrbitalPoint {
      */
     public List<OrbitalPoint> getChildren() {
         return children;
+    }
+
+    /**
+     * @param parent the parent to set
+     */
+    public void setParent(OrbitalPoint parent) {
+        this.parent = parent;
     }
 }

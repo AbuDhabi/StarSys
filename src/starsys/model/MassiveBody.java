@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package model;
+package starsys.model;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
@@ -52,6 +52,14 @@ public abstract class MassiveBody extends OrbitalPoint {
         } else {
             this.color = color;
         }
+    }
+    
+    /**
+     * In kilograms per kilometer cubed.
+     * @return 
+     */
+    public double getDensity() {
+        return mass / (4/3*Math.PI*radius*radius*radius);
     }
 
     /**

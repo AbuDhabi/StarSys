@@ -14,20 +14,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package model;
+package starsys.generator;
 
-import java.awt.Color;
-import java.awt.geom.Point2D;
 import java.util.List;
+import starsys.model.Chunk;
+import starsys.model.GasGiant;
+import starsys.model.OrbitalPoint;
+import starsys.model.Star;
+import starsys.model.Terrestrial;
 
 /**
  *
  * @author abudhabi
  */
-public class Star extends MassiveBody {
-
-    public Star(double tilt, double rotationVelocity, double mass, double radius, double temperature, double albedo, Color color, long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, List<OrbitalPoint> children, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
-        super(tilt, rotationVelocity, mass, radius, temperature, albedo, color, id, name, cachedTime, offset, center, parent, children, semiMajorAxis, angularVelocity, eccentricity, inclination);
-    }
+public interface Generator {
     
+    public Star generateStar(CelestialBodyParameters params);
+    
+    public Terrestrial generateTerrestrialWorld(CelestialBodyParameters params);
+    
+    public Chunk generateChunk(CelestialBodyParameters params);
+    
+    public List<Chunk> generateBelt(CelestialBodyParameters params, int nrofChunks);
+    
+    public GasGiant generateGasGiant(CelestialBodyParameters params);
+    
+    public OrbitalPoint generateSystem(SystemParameters params);
 }

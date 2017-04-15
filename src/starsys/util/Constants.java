@@ -14,30 +14,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package generator;
-
-import model.Chunk;
-import model.GasGiant;
-import model.MassiveBody;
-import model.OrbitalPoint;
-import model.Star;
-import model.Terrestrial;
+package starsys.util;
 
 /**
  *
  * @author abudhabi
  */
-public interface Generator {
+public class Constants {
+    // Kilograms.
+    public static final double SUN_MASS = 1.98855e30;
+    // Kilometers.
+    public static final double SUN_RADIUS = 696342;
+    // Kilograms.
+    public static final double EARTH_MASS = 5.97237e24;
+    // Kilometers.
+    public static final double EARTH_RADIUS = 6371.0;
+            
     
-    public Star generateRandomStar(String spectralClass, OrbitalPoint parent);
+    // Kilometers.
+    public static final double ASTRONOMICAL_UNIT = 1.4960e8;
     
-    public Terrestrial generateRandomTerrestrialWorld(OrbitalPoint parent);
+    // Hopefully in (J)/(km^2*day*K^4).
+    public static final double STEFAN_BOLTZMAN_CONSTANT = (5.670367e-8)*(1000000*86400);
+    // Hopefully in (km^2*kg)/(day^2).
+    public static final double GRAVITATIONAL_CONSTANT = (6.673e-11)*(86400*86400/1000000000);
     
-    public Chunk generateRandomChunk(OrbitalPoint parent);
-    
-    public GasGiant generateRandomGasGiant(OrbitalPoint parent);
-    
-    public Star generateRandomStarSystem(int nrofSuns, String spectralClassOfPrimary);
-    
-    public MassiveBody populatePlanetWithMoons(int nrofMoons, MassiveBody parent);
 }

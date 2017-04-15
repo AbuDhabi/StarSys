@@ -14,40 +14,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package model;
+package starsys.model;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.util.List;
+import starsys.util.ChunkClass;
 
 /**
  *
  * @author abudhabi
  */
-public class GasGiant extends MassiveBody {
-    private Atmosphere atmosphere;
+public class Chunk extends MassiveBody {
+    
+    private final ChunkClass chunkClass;
 
-    public GasGiant(Atmosphere atmosphere, double tilt, double rotationVelocity, double mass, double radius, double temperature, double albedo, Color color, long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, List<OrbitalPoint> children, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
+    public Chunk(ChunkClass chunkClass, double tilt, double rotationVelocity, double mass, double radius, double temperature, double albedo, Color color, long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, List<OrbitalPoint> children, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
         super(tilt, rotationVelocity, mass, radius, temperature, albedo, color, id, name, cachedTime, offset, center, parent, children, semiMajorAxis, angularVelocity, eccentricity, inclination);
-        if (atmosphere == null) {
-            this.atmosphere = new Atmosphere();
-        } else {
-            this.atmosphere = atmosphere;
-        }
+        this.chunkClass = chunkClass;
+    }
+
+    /**
+     * @return the chunkClass
+     */
+    public ChunkClass getChunkClass() {
+        return chunkClass;
     }
     
-    /**
-     * @return the atmosphere
-     */
-    public Atmosphere getAtmosphere() {
-        return atmosphere;
-    }
-
-    /**
-     * @param atmosphere the atmosphere to set
-     */
-    public void setAtmosphere(Atmosphere atmosphere) {
-        this.atmosphere = atmosphere;
-    }
-
 }
