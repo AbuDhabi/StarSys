@@ -16,167 +16,90 @@
  */
 package starsys.generator;
 
+import java.util.ArrayList;
 import java.util.List;
-import starsys.util.SpectralClass;
+import starsys.model.OrbitalPoint;
+
 
 /**
  *
  * @author abudhabi
  */
 public class SystemParameters {
-    private Integer nrofDirectChildren;
-    private Boolean grandChildrenAllowed;
-    private Integer nrofTerrestrials;
-    private Integer nrofChunksPerBelt;
-    private Integer nrofChunkBelts;
-    private Integer nrofGasGiants;
-    private Integer nrofSuns;
-    private SpectralClass primarySpectralClass;
-    private List<SpectralClass> companionSpectralClasses;
+    private SystemParameters parent;
+    private CelestialBodyParameters specification;
+    private boolean childrenAllowed;
+    private List<SystemParameters> children;
 
-    /**
-     * @return the nrofDirectChildren
-     */
-    public Integer getNrofDirectChildren() {
-        return nrofDirectChildren;
+    public SystemParameters(SystemParameters parent, CelestialBodyParameters specification, boolean childrenAllowed, List<SystemParameters> children) {
+        this.parent = parent;
+        if (specification == null) {
+            this.specification = new CelestialBodyParameters();
+        } else {
+           this.specification = specification;
+        }
+        this.childrenAllowed = childrenAllowed;
+        if (children == null) {
+            this.children = new ArrayList<>();
+        } else {
+            this.children = children;
+        }
     }
 
     /**
-     * @param nrofChildren the nrofDirectChildren to set
-     * @return 
+     * @return the parent
      */
-    public SystemParameters setNrofChildren(Integer nrofChildren) {
-        this.nrofDirectChildren = nrofChildren;
-        return this;
+    public SystemParameters getParent() {
+        return parent;
     }
 
     /**
-     * @return the nrofTerrestrials
+     * @param parent the parent to set
      */
-    public Integer getNrofTerrestrials() {
-        return nrofTerrestrials;
+    public void setParent(SystemParameters parent) {
+        this.parent = parent;
     }
 
     /**
-     * @param nrofTerrestrials the nrofTerrestrials to set
-     * @return 
+     * @return the specification
      */
-    public SystemParameters setNrofTerrestrials(Integer nrofTerrestrials) {
-        this.nrofTerrestrials = nrofTerrestrials;
-        return this;
+    public CelestialBodyParameters getSpecification() {
+        return specification;
     }
 
     /**
-     * @return the nrofChunksPerBelt
+     * @param specification the specification to set
      */
-    public Integer getNrofChunksPerBelt() {
-        return nrofChunksPerBelt;
+    public void setSpecification(CelestialBodyParameters specification) {
+        this.specification = specification;
     }
 
     /**
-     * @param nrofChunksPerBelt the nrofChunksPerBelt to set
-     * @return 
+     * @return the childrenAllowed
      */
-    public SystemParameters setNrofChunksPerBelt(Integer nrofChunksPerBelt) {
-        this.nrofChunksPerBelt = nrofChunksPerBelt;
-        return this;
+    public boolean isChildrenAllowed() {
+        return childrenAllowed;
     }
 
     /**
-     * @return the nrofChunkBelts
+     * @param childrenAllowed the childrenAllowed to set
      */
-    public Integer getNrofChunkBelts() {
-        return nrofChunkBelts;
+    public void setChildrenAllowed(boolean childrenAllowed) {
+        this.childrenAllowed = childrenAllowed;
     }
 
     /**
-     * @param nrofChunkBelts the nrofChunkBelts to set
-     * @return 
+     * @return the children
      */
-    public SystemParameters setNrofChunkBelts(Integer nrofChunkBelts) {
-        this.nrofChunkBelts = nrofChunkBelts;
-        return this;
+    public List<SystemParameters> getChildren() {
+        return children;
     }
 
     /**
-     * @return the nrofGasGiants
+     * @param children the children to set
      */
-    public Integer getNrofGasGiants() {
-        return nrofGasGiants;
+    public void setChildren(List<SystemParameters> children) {
+        this.children = children;
     }
-
-    /**
-     * @param nrofGasGiants the nrofGasGiants to set
-     * @return 
-     */
-    public SystemParameters setNrofGasGiants(Integer nrofGasGiants) {
-        this.nrofGasGiants = nrofGasGiants;
-        return this;
-    }
-
-    /**
-     * @return the nrofSuns
-     */
-    public Integer getNrofSuns() {
-        return nrofSuns;
-    }
-
-    /**
-     * @param nrofSuns the nrofSuns to set
-     * @return 
-     */
-    public SystemParameters setNrofSuns(Integer nrofSuns) {
-        this.nrofSuns = nrofSuns;
-        return this;
-    }
-
-    /**
-     * @return the primarySpectralClass
-     */
-    public SpectralClass getPrimarySpectralClass() {
-        return primarySpectralClass;
-    }
-
-    /**
-     * @param primarySpectralClass the primarySpectralClass to set
-     * @return 
-     */
-    public SystemParameters setPrimarySpectralClass(SpectralClass primarySpectralClass) {
-        this.primarySpectralClass = primarySpectralClass;
-        return this;
-    }
-
-    /**
-     * @return the companionSpectralClasses
-     */
-    public List<SpectralClass> getCompanionSpectralClasses() {
-        return companionSpectralClasses;
-    }
-
-    /**
-     * @param companionSpectralClasses the companionSpectralClasses to set
-     * @return 
-     */
-    public SystemParameters setCompanionSpectralClasses(List<SpectralClass> companionSpectralClasses) {
-        this.companionSpectralClasses = companionSpectralClasses;
-        return this;
-    }
-
-    /**
-     * @return the grandChildrenAllowed
-     */
-    public Boolean isGrandChildrenAllowed() {
-        return grandChildrenAllowed;
-    }
-
-    /**
-     * @param grandChildrenAllowed the grandChildrenAllowed to set
-     * @return 
-     */
-    public SystemParameters setGrandChildrenAllowed(Boolean grandChildrenAllowed) {
-        this.grandChildrenAllowed = grandChildrenAllowed;
-        return this;
-    }
-    
     
 }

@@ -16,9 +16,10 @@
  */
 package starsys.generator;
 
+import java.util.List;
 import starsys.model.Chunk;
 import starsys.model.GasGiant;
-import starsys.model.MassiveBody;
+import starsys.model.OrbitalPoint;
 import starsys.model.Star;
 import starsys.model.Terrestrial;
 
@@ -34,9 +35,9 @@ public interface Generator {
     
     public Chunk generateChunk(CelestialBodyParameters params);
     
+    public List<Chunk> generateBelt(CelestialBodyParameters params, int nrofChunks);
+    
     public GasGiant generateGasGiant(CelestialBodyParameters params);
     
-    public Star generateStarSystem(SystemParameters params);
-    
-    public MassiveBody populatePlanetWithMoons(SystemParameters params);
+    public OrbitalPoint generateSystem(SystemParameters params);
 }

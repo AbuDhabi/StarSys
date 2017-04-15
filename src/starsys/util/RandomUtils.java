@@ -14,31 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package generator;
+package starsys.util;
 
-import model.Chunk;
-import model.GasGiant;
-import model.MassiveBody;
-import model.OrbitalPoint;
-import model.SpectralClass;
-import model.Star;
-import model.Terrestrial;
+import java.util.List;
+import java.util.Random;
 
 /**
  *
  * @author abudhabi
  */
-public interface Generator {
-    
-    public Star generateRandomStar(SpectralClass spectralClass, OrbitalPoint parent);
-    
-    public Terrestrial generateRandomTerrestrialWorld(OrbitalPoint parent);
-    
-    public Chunk generateRandomChunk(OrbitalPoint parent);
-    
-    public GasGiant generateRandomGasGiant(OrbitalPoint parent);
-    
-    public Star generateRandomStarSystem(int nrofSuns, String spectralClassOfPrimary);
-    
-    public MassiveBody populatePlanetWithMoons(int nrofMoons, MassiveBody parent);
+public class RandomUtils {
+    public static <T> T returnOneOfThese(Random r, List<T> things) {
+        return things.get(r.nextInt(things.size()));
+    }
 }

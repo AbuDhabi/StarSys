@@ -18,11 +18,13 @@ package starsys.generator;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import starsys.model.Atmosphere;
 import starsys.model.Chunk;
 import starsys.model.GasGiant;
 import starsys.model.MassiveBody;
+import starsys.model.OrbitalPoint;
 import starsys.model.Star;
 import starsys.model.Terrestrial;
 import starsys.util.ChunkClass;
@@ -670,13 +672,170 @@ public class DefaultGenerator implements Generator {
     }
 
     @Override
-    public Star generateStarSystem(SystemParameters params) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public OrbitalPoint generateSystem(SystemParameters params) {
+        if (params.getParent() == null) {
+            // This is the root node, typically a star.
+            Star primary = generateStar(params.getSpecification());
+            if (params.isChildrenAllowed()) {
+                params.getChildren().stream().forEach((p) -> {
+                    primary.getChildren().add(generateSystem(p));
+                });
+            }
+            return primary;
+        } else {
+            // This node is somewhere in the bowels of the system, not the root.
+            // Could be a star, but could be a planet or asteroid.
+            if (params.getSpecification().getSpectralClass() != null) {
+                Star companion = generateStar(params.getSpecification());
+                if (params.isChildrenAllowed()) {
+                    params.getChildren().stream().forEach((p) -> {
+                        companion.getChildren().add(generateSystem(p));
+                    });
+                }
+                return companion;
+            } else if (params.getSpecification().getGasGiantClass() != null) {
+                GasGiant giant = generateGasGiant(params.getSpecification());
+                if (params.isChildrenAllowed()) {
+                    params.getChildren().stream().forEach((p) -> {
+                        giant.getChildren().add(generateSystem(p));
+                    });
+                }
+                return giant;
+            } else if (params.getSpecification().getTerrestrialClass() != null) {
+                Terrestrial rock = generateTerrestrialWorld(params.getSpecification());
+                if (params.isChildrenAllowed()) {
+                    params.getChildren().stream().forEach((p) -> {
+                        rock.getChildren().add(generateSystem(p));
+                    });
+                }
+                return rock;
+            } else if (params.getSpecification().getChunkClass() != null) {
+                Chunk chunk = generateChunk(params.getSpecification());
+                if (params.isChildrenAllowed()) {
+                    params.getChildren().stream().forEach((p) -> {
+                        chunk.getChildren().add(generateSystem(p));
+                    });
+                }
+                return chunk;
+            } else {
+                // OK, I'll choose which makes sense.
+                if (params.getParent().getSpecification().getSpectralClass() != null) {
+                    // Parent is a star. Options for this child:
+                    // - Smaller star.
+                    // - Gas giant.
+                    // - Rocky world.
+                    // - Chunk.
+                    int number = random.nextInt(10);
+                    if (number == 0) {
+                        Star companion = generateStar(params.getSpecification());
+                        if (params.isChildrenAllowed()) {
+                            params.getChildren().stream().forEach((p) -> {
+                                companion.getChildren().add(generateSystem(p));
+                            });
+                        }
+                        return companion;
+                    } else if (number > 0 && number <= 3) {
+                        GasGiant giant = generateGasGiant(params.getSpecification());
+                        if (params.isChildrenAllowed()) {
+                            params.getChildren().stream().forEach((p) -> {
+                                giant.getChildren().add(generateSystem(p));
+                            });
+                        }
+                        return giant;
+                    } else if (number > 3 && number <= 6) {
+                        Terrestrial rock = generateTerrestrialWorld(params.getSpecification());
+                        if (params.isChildrenAllowed()) {
+                            params.getChildren().stream().forEach((p) -> {
+                                rock.getChildren().add(generateSystem(p));
+                            });
+                        }
+                        return rock;
+                    } else {
+                        Chunk chunk = generateChunk(params.getSpecification());
+                        if (params.isChildrenAllowed()) {
+                            params.getChildren().stream().forEach((p) -> {
+                                chunk.getChildren().add(generateSystem(p));
+                            });
+                        }
+                        return chunk;
+                    }
+                } else if (params.getParent().getSpecification().getGasGiantClass() != null) {
+                    // Parent is a gas giant. Options for this child:
+                    // - Rocky world.
+                    // - Chunk.
+                    if (random.nextBoolean()) {
+                        Terrestrial rock = generateTerrestrialWorld(params.getSpecification());
+                        if (params.isChildrenAllowed()) {
+                            params.getChildren().stream().forEach((p) -> {
+                                rock.getChildren().add(generateSystem(p));
+                            });
+                        }
+                        return rock;
+                    } else {
+                        Chunk chunk = generateChunk(params.getSpecification());
+                        if (params.isChildrenAllowed()) {
+                            params.getChildren().stream().forEach((p) -> {
+                                chunk.getChildren().add(generateSystem(p));
+                            });
+                        }
+                        return chunk;
+                    }
+                } else if (params.getParent().getSpecification().getTerrestrialClass() != null) {
+                    // Parent is a rocky world. Options for this child:
+                    // - Smaller rocky world. Not implemented to make sure it's smaller.
+                    // - Chunk.
+                    if (random.nextBoolean()) {
+                        Terrestrial rock = generateTerrestrialWorld(params.getSpecification());
+                        if (params.isChildrenAllowed()) {
+                            params.getChildren().stream().forEach((p) -> {
+                                rock.getChildren().add(generateSystem(p));
+                            });
+                        }
+                        return rock;
+                    } else {
+                        Chunk chunk = generateChunk(params.getSpecification());
+                        if (params.isChildrenAllowed()) {
+                            params.getChildren().stream().forEach((p) -> {
+                                chunk.getChildren().add(generateSystem(p));
+                            });
+                        }
+                        return chunk;
+                    }
+                } else if (params.getParent().getSpecification().getChunkClass() != null) {
+                    // Parent is a chunk. Options for this child:
+                    // - Smaller chunk. Not actually implemented to make sure it's smaller!
+                    Chunk chunk = generateChunk(params.getSpecification());
+                    if (params.isChildrenAllowed()) {
+                        params.getChildren().stream().forEach((p) -> {
+                            chunk.getChildren().add(generateSystem(p));
+                        });
+                    }
+                    return chunk;
+                } else {
+                    // OK, both this child and the parent are unspecified.
+                    // Safest decision is to make a chunk. 
+                    // Which still doesn't guarantee that stuff will make sense.
+                    Chunk chunk = generateChunk(params.getSpecification());
+                    if (params.isChildrenAllowed()) {
+                        params.getChildren().stream().forEach((p) -> {
+                            chunk.getChildren().add(generateSystem(p));
+                        });
+                    }
+                    return chunk;
+                }
+
+            }
+            
+        }
     }
 
     @Override
-    public MassiveBody populatePlanetWithMoons(SystemParameters params) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Chunk> generateBelt(CelestialBodyParameters params, int nrofChunks) {
+        List<Chunk> belt = new ArrayList<>();
+        for (int i=0; i<nrofChunks; i++) {
+            belt.add(generateChunk(params));
+        }
+        return belt;
     }
 
     

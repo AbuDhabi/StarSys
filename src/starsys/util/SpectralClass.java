@@ -17,6 +17,7 @@
 package starsys.util;
 
 import java.awt.Color;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -55,6 +56,25 @@ public enum SpectralClass {
             return M;
         }
         return null; // Guess the random number generator is malfunctioning.
+    }
+    
+    public static SpectralClass getThisOrLighterClass(Random random, SpectralClass spectralClass) {
+        if (spectralClass == O) {
+            return RandomUtils.returnOneOfThese(random,Arrays.asList(O,B,A,F,G,K,M));
+        } else if (spectralClass == B) {
+            return RandomUtils.returnOneOfThese(random,Arrays.asList(B,A,F,G,K,M));
+        } else if (spectralClass == A) {
+            return RandomUtils.returnOneOfThese(random,Arrays.asList(A,F,G,K,M));
+        } else if (spectralClass == F) {
+            return RandomUtils.returnOneOfThese(random,Arrays.asList(F,G,K,M));
+        } else if (spectralClass == G) {
+            return RandomUtils.returnOneOfThese(random,Arrays.asList(G,K,M));
+        } else if (spectralClass == K) {
+            return RandomUtils.returnOneOfThese(random,Arrays.asList(K,M));
+        } else if (spectralClass == M) {
+            return M;
+        }
+        return null; // Other types unsupported.
     }
     
     private final double upperTemperature;
