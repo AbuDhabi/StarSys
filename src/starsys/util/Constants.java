@@ -29,10 +29,13 @@ public class Constants {
     public static final double EARTH_MASS = 5.97237e24;
     // Kilometers.
     public static final double EARTH_RADIUS = 6371.0;
-            
     
     // Kilometers.
     public static final double ASTRONOMICAL_UNIT = 1.4960e8;
+    // Kilometers.
+    public static final double KEPLER_70B_SEMIMAJOR_AXIS = 0.006*ASTRONOMICAL_UNIT;
+    // Kilometers.
+    public static final double MERCURY_SEMIMAJOR_AXIS = 57909050;
     
     // Hopefully in (J)/(km^2*day*K^4).
     public static final double STEFAN_BOLTZMAN_CONSTANT = (5.670367e-8)*(1000000*86400);

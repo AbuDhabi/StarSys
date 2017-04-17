@@ -19,6 +19,7 @@ package starsys.model;
 import com.google.gson.Gson;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -41,9 +42,9 @@ public class OrbitalPoint {
     // All orbiters.
     protected final List<OrbitalPoint> children;
     // Kilometers.
-    protected final double semiMajorAxis;
+    private double semiMajorAxis;
     // Radians per day.
-    protected final double angularVelocity;
+    private double angularVelocity;
     // Unused. 0 - circular, 1 - parabolic. 
     protected final double eccentricity;
     // Unused. Angle between orbital plane and reference plane.
@@ -51,6 +52,24 @@ public class OrbitalPoint {
     
     public String toJson() {
         return new Gson().toJson(this);
+    }
+    
+    public double getMassOfEntireSubSystemFromThisNode() {
+        double result = 0;
+        if (this instanceof MassiveBody) {
+          result = result + ((MassiveBody)this).getMass();
+        }
+        for (OrbitalPoint op: children) {
+            result = result + op.getMassOfEntireSubSystemFromThisNode();
+        }
+        return result;
+    }
+    
+    public void addChildren(OrbitalPoint... newChildren) {
+        for (OrbitalPoint p: newChildren) {
+            this.children.add(p);
+            p.setParent(this);
+        }
     }
 
     public OrbitalPoint(long id, String name, double cachedTime, int offset, Point2D.Double center, OrbitalPoint parent, List<OrbitalPoint> children, double semiMajorAxis, double angularVelocity, double eccentricity, double inclination) {
@@ -200,5 +219,19 @@ public class OrbitalPoint {
      */
     public void setParent(OrbitalPoint parent) {
         this.parent = parent;
+    }
+
+    /**
+     * @param semiMajorAxis the semiMajorAxis to set
+     */
+    public void setSemiMajorAxis(double semiMajorAxis) {
+        this.semiMajorAxis = semiMajorAxis;
+    }
+
+    /**
+     * @param angularVelocity the angularVelocity to set
+     */
+    public void setAngularVelocity(double angularVelocity) {
+        this.angularVelocity = angularVelocity;
     }
 }

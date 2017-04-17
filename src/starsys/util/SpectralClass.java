@@ -18,6 +18,7 @@ package starsys.util;
 
 import java.awt.Color;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -38,21 +39,43 @@ public enum SpectralClass {
     T (1300,    700, 0.075*Constants.SUN_MASS, 0.012*Constants.SUN_MASS,  0.2*Constants.SUN_RADIUS,   0.1*Constants.SUN_RADIUS, Color.MAGENTA),
     D (100000, 5000,   1.3*Constants.SUN_MASS,  0.17*Constants.SUN_MASS, 0.02*Constants.SUN_RADIUS, 0.008*Constants.SUN_RADIUS, Color.MAGENTA);
 
+    private final double upperTemperature;
+    private final double lowerTemperature;
+    private final double upperMass;
+    private final double lowerMass;
+    private final double upperRadius;
+    private final double lowerRadius;
+    private final Color color;
+    
+    private SpectralClass(double upperTemperature, double lowerTemperature, double upperMass, double lowerMass, double upperRadius, double lowerRadius, Color color) {
+        this.upperTemperature = upperTemperature;
+        this.lowerTemperature = lowerTemperature;
+        this.upperMass = upperMass;
+        this.lowerMass = lowerMass;
+        this.upperRadius = upperRadius;
+        this.lowerRadius = lowerRadius;
+        this.color = color;
+    }
+    
+    public static List<SpectralClass> getOToM() {
+        return Arrays.asList(O,B,A,F,G,K,M);
+    }
+    
     public static SpectralClass getRandomSpectralClassOToM(Random random) {
         int number = random.nextInt(300);
         if (number == 0) {
             return O;
-        } else if (number >= 1 && number < 20) {
+        } else if (number >= 1 && number < 2) {
             return B;
-        } else if (number >= 20 && number < 50) {
+        } else if (number >= 2 && number < 5) {
             return A;
-        } else if (number >= 50 && number < 90) {
+        } else if (number >= 5 && number < 25) {
             return F;
-        } else if (number >= 90 && number < 160) {
+        } else if (number >= 25 && number < 60) {
             return G;
-        } else if (number >= 160 && number < 220) {
+        } else if (number >= 60 && number < 100) {
             return K;
-        } else if (number >= 220) {
+        } else if (number >= 100) {
             return M;
         }
         return null; // Guess the random number generator is malfunctioning.
@@ -75,25 +98,6 @@ public enum SpectralClass {
             return M;
         }
         return null; // Other types unsupported.
-    }
-    
-    private final double upperTemperature;
-    private final double lowerTemperature;
-    private final double upperMass;
-    private final double lowerMass;
-    private final double upperRadius;
-    private final double lowerRadius;
-    private final Color color;
-    
-
-    private SpectralClass(double upperTemperature, double lowerTemperature, double upperMass, double lowerMass, double upperRadius, double lowerRadius, Color color) {
-        this.upperTemperature = upperTemperature;
-        this.lowerTemperature = lowerTemperature;
-        this.upperMass = upperMass;
-        this.lowerMass = lowerMass;
-        this.upperRadius = upperRadius;
-        this.lowerRadius = lowerRadius;
-        this.color = color;
     }
 
     /**
